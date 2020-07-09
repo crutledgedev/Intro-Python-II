@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,6 +39,8 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player1 = Player("Chance", room['outside'])
+
 
 # Write a loop that:
 #
@@ -49,3 +52,11 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+while True:
+
+    answer = input(
+        f"\n{player1.name}'s location: {player1.current_room.name}. {player1.current_room.description} \n\nChoose n, s, e, w: ")
+    if len(answer) == 1:
+        player1.move(answer)
+    else:
+        print("I only understand single letter commands, please try again")
