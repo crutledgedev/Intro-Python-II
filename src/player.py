@@ -8,22 +8,22 @@ class Player:
 
     def move(self, string):
         if string == "n":
-            if self.current_room == None:
+            if self.current_room.n_to == None:
                 print("\nYou can't go in that direction")
             else:
                 self.current_room = self.current_room.n_to
         elif string == "s":
-            if self.current_room == None:
+            if self.current_room.s_to == None:
                 print("\nYou can't go in that direction")
             else:
                 self.current_room = self.current_room.s_to
         elif string == "e":
-            if self.current_room == None:
+            if self.current_room.e_to == None:
                 print("\nYou can't go in that direction")
             else:
                 self.current_room = self.current_room.e_to
         elif string == "w":
-            if self.current_room == None:
+            if self.current_room.w_to == None:
                 print("\nYou can't go in that direction")
             else:
                 self.current_room = self.current_room.w_to
