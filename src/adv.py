@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -33,11 +35,38 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+
+# create items
+
+item = {
+    'rock': Item("rock", "Just an ordinary rock... this isn't a survival game, leave it alone"),
+    'newspaper': Item("newspaper", "An old weathered news paper too faded to read"),
+    'shoe': Item("shoe", "An old shoe.. I wonder how it got here? Maybe someone got a little too close to that edge. Be careful!"),
+    'crate': Item("crate", "Just an emptyh wooden crate"),
+    'spider': Item("spider", "An ordinary spider... not much a treasure, but it's yours if you want to keep it"),
+    'sign': Item("sign", "This sign reads - NO TRESPASSING"),
+
+
+}
+
+
+# add items to rooms
+
+room['outside'].items.append(item['rock'])
+room['outside'].items.append(item['sign'])
+room['foyer'].items.append(item['newspaper'])
+room['overlook'].items.append(item['shoe'])
+room['narrow'].items.append(item['crate'])
+room['treasure'].items.append(item['spider'])
+
+
 #
 # Main
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player1 = Player("Chance", room['outside'])
+
 
 # Write a loop that:
 #
@@ -49,3 +78,15 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+while True:
+    print(f"Items in room:")
+    for each in player1.current_room.items:
+        print(each.name)
+    answer = input(
+        f"\n{player1.name}'s location: {player1.current_room.name}. {player1.current_room.description} \n\nChoose n, s, e, w, i, q, take [item], drop [item]: ")
+    if len(answer) == 1:
+        player1.move(answer)
+    else:
+        takeOrDrop = answer.split()[0]
+        itemName = answer.split()[1]
+        player1.take_drop(takeOrDrop, itemName)
